@@ -3,41 +3,49 @@ import { View, Text, StyleSheet, Image, Animated, Easing } from "react-native";
 import { commonStyles } from "../styles/commonStyles";
 
 const Page1 = () => {
-    const progress = useRef(new Animated.Value(0)).current;
+    const dot1 = useRef(new Animated.Value(0)).current;
+    const dot2 = useRef(new Animated.Value(0)).current;
+    const dot3 = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        Animated.loop(
-            Animated.timing(progress, {
-                toValue: 100,
-                duration: 5000, // Adjust speed of animation
-                easing: Easing.linear,
-                useNativeDriver: false,
-            })
-        ).start();
+        const animateDot = (dot: Animated.Value, delay: number) => {
+            Animated.loop(
+                Animated.sequence([
+                    Animated.timing(dot, {
+                        toValue: 1,
+                        duration: 500,
+                        easing: Easing.ease,
+                        useNativeDriver: false,
+                    }),
+                    Animated.timing(dot, {
+                        toValue: 0,
+                        duration: 500,
+                        easing: Easing.ease,
+                        useNativeDriver: false,
+                    }),
+                ])
+            ).start();
+        };
+
+        animateDot(dot1, 0);
+        setTimeout(() => animateDot(dot2, 300), 300);
+        setTimeout(() => animateDot(dot3, 600), 600);
     }, []);
 
     return (
         <View style={[commonStyles.container, styles.centerContent]}>
             <Image source={require("../image/x.png")} style={styles.image} />
-
             <Text style={styles.welcomeText}>Welcome to my App</Text>
 
-            {/* Animated Loading Bar */}
-            <View style={styles.loadingBarContainer}>
-                <Animated.View
-                    style={[
-                        styles.loadingBar,
-                        {
-                            width: progress.interpolate({
-                                inputRange: [0, 100],
-                                outputRange: ["0%", "100%"],
-                            }),
-                        },
-                    ]}
-                />
+            {/* Pulsating Dots */}
+            <View style={styles.dotsContainer}>
+                <Animated.View style={[styles.dot, { opacity: dot1 }]} />
+                <Animated.View style={[styles.dot, { opacity: dot2 }]} />
+                <Animated.View style={[styles.dot, { opacity: dot3 }]} />
             </View>
 
-            <Text style={styles.subtitle}>This is a demo app, designed to give you a sneak peek into the future</Text>
+            <Text style={styles.subtitle}>This is a demo app, </Text>
+            <Text style={styles.subtitle2}> designed to give you a sneak peek into the future</Text>
         </View>
     );
 };
@@ -61,24 +69,33 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         color: "#ffffff",
     },
-    loadingBarContainer: {
-        width: 150, // Adjust bar width
-        height: 10,
-        backgroundColor: "#444",
-        borderRadius: 5,
-        overflow: "hidden",
+    dotsContainer: {
+        flexDirection: "row",
         marginTop: 10,
     },
-    loadingBar: {
-        height: "100%",
+    dot: {
+        width: 10,
+        height: 10,
+        borderRadius: 5,
         backgroundColor: "#ffffff",
+        marginHorizontal: 5,
     },
     subtitle: {
-        marginTop: 10,
+        marginTop: 20,
         fontSize: 11,
         fontStyle: "italic",
         textAlign: "center",
         color: "#ffffff",
+        
+    },
+    subtitle2: {
+        marginTop: 5,
+        fontSize: 11,
+        fontStyle: "italic",
+        textAlign: "center",
+        color: "#ffffff",
+        marginBottom: 50,
+        
     },
 });
 
