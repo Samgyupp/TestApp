@@ -31,7 +31,7 @@ const ProfileScreen: React.FC<Props> = ({ route }) => {
 
                     if (route.name === "Front Page") {
                         iconName = "home";
-                    } else if (route.name === "Details") {
+                    } else if (route.name === "Profile") {
                         iconName = "user";
                     } else if (route.name === "Updates") {
                         iconName = "bell";
@@ -48,7 +48,7 @@ const ProfileScreen: React.FC<Props> = ({ route }) => {
                 component={Page1} 
             />
             <Tab.Screen 
-                name="Details" 
+                name="Profile" 
                 component={Page2} 
             />
             <Tab.Screen 

@@ -1,17 +1,46 @@
-import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, Text, StyleSheet, Image, Animated, Easing } from "react-native";
 import { commonStyles } from "../styles/commonStyles";
 
+const Page1 = () => {
+    const progress = useRef(new Animated.Value(0)).current;
 
-const Page1 = () => (
-    <View style={[commonStyles.container, styles.centerContent]}>
-        <Image source = {require("../image/x.png")} style={styles.image}/>
+    useEffect(() => {
+        Animated.loop(
+            Animated.timing(progress, {
+                toValue: 100,
+                duration: 5000, // Adjust speed of animation
+                easing: Easing.linear,
+                useNativeDriver: false,
+            })
+        ).start();
+    }, []);
 
-        <Text style={styles.welcomeText}>Welcome to my App</Text>
-        <Text style={styles.nameText}>█▒▒▒▒▒▒▒▒▒</Text>
-        <Text style={styles.subtitle}>This is a demo app, designed to give you a sneak peek into the future</Text>
-    </View>
-);
+    return (
+        <View style={[commonStyles.container, styles.centerContent]}>
+            <Image source={require("../image/x.png")} style={styles.image} />
+
+            <Text style={styles.welcomeText}>Welcome to my App</Text>
+
+            {/* Animated Loading Bar */}
+            <View style={styles.loadingBarContainer}>
+                <Animated.View
+                    style={[
+                        styles.loadingBar,
+                        {
+                            width: progress.interpolate({
+                                inputRange: [0, 100],
+                                outputRange: ["0%", "100%"],
+                            }),
+                        },
+                    ]}
+                />
+            </View>
+
+            <Text style={styles.subtitle}>This is a demo app, designed to give you a sneak peek into the future</Text>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     centerContent: {
@@ -32,11 +61,17 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         color: "#ffffff",
     },
-    nameText: {
-        fontSize: 15,
-        fontWeight: "600",
-        marginBottom: 5,
-        color: "#ffffff",
+    loadingBarContainer: {
+        width: 150, // Adjust bar width
+        height: 10,
+        backgroundColor: "#444",
+        borderRadius: 5,
+        overflow: "hidden",
+        marginTop: 10,
+    },
+    loadingBar: {
+        height: "100%",
+        backgroundColor: "#ffffff",
     },
     subtitle: {
         marginTop: 10,

@@ -5,7 +5,7 @@ import { commonStyles } from "../styles/commonStyles";
 const Page3 = () => (
     <View style={[commonStyles.container, styles.centerContent]}>
         <Text style={styles.updateText}>U P D A T E S</Text>
-        <Text style={styles.subText}>current version: 0.1</Text>
+        <Text style={styles.subText}>current version: 0.2</Text>
 
     </View>
 );
