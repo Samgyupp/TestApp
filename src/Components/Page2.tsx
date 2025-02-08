@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Linking } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome"; // Import FontAwesome icons
+import { View, Text, StyleSheet, TouchableOpacity, Linking, Image } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome"; 
 import { commonStyles } from "../styles/commonStyles";
 
 const Page2 = () => {
@@ -10,6 +10,9 @@ const Page2 = () => {
 
     return (
         <View style={[commonStyles.container, styles.centerContent]}>
+            {/* Profile Image */}
+            <Image source={require("../image/sam.jpg")} style={styles.profileImage} />
+
             <Text style={styles.nameText}>Samuel Samoza</Text>
             <Text style={styles.subText}>BSIT2A</Text>
 
@@ -37,6 +40,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flex: 1,
     },
+    profileImage: {
+        width: 120, 
+        height: 120,
+        borderRadius: 30, 
+        marginBottom: 15,
+    },
     nameText: {
         fontSize: 20,
         fontWeight: "600",
@@ -54,7 +63,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     icon: {
-        marginHorizontal: 15, // Space between icons
+        marginHorizontal: 15, 
     },
 });
 

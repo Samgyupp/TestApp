@@ -14,6 +14,7 @@ const Tab = createBottomTabNavigator();
 
 type ProfileScreenRouteProp = RouteProp <RootStackParamList, 'Profile'>;
 
+
 type Props = {
     route : ProfileScreenRouteProp;
 };
@@ -32,15 +33,15 @@ screenOptions={{
   }}
   >
     <Tab.Screen 
-    name="Page 1" 
+    name="Front Page" 
     component={Page1}
      />
     <Tab.Screen 
-    name="Page 2" 
+    name="Details" 
     component={Page2} 
     />
     <Tab.Screen 
-    name="Page 3" 
+    name="Updates" 
     component={Page3} 
     />
     </Tab.Navigator>
