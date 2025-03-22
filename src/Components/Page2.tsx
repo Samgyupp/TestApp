@@ -22,7 +22,7 @@ const Page2 = () => {
                     <Icon name="instagram" size={40} color="#ffffff" style={styles.icon} />
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => openLink("https://www.facebook.com/smlndcho/")}>
+                <TouchableOpacity onPress={() => openLink("https://www.facebook.com/sam.samoza.9/")}>
                     <Icon name="facebook" size={40} color="#ffffff" style={styles.icon} />
                 </TouchableOpacity>
 
